@@ -1,10 +1,12 @@
 server:
-  port: 8081 #Spring Cloud - Eureka 기본 서버포트
+  port: 60000 #Spring Cloud - Eureka 기본 서버포트
 
 eureka:
   instance:
     hostname: localhost
-    prefer-ip-address: false
+    #hostname: localhost
+    #prefer-ip-address: true
+    instance-id: ${spring.application.name}
   client:
     register-with-eureka: true #Cluster 환경에서 본인의 서버 주소를 default 도메인의 다른 서버에 본인의 주소를 알림, 단일 서버에서는 false
     fetch-registry: true #메모리에 올려진 레지스트리 목록을 주기적으로 갱신, 클러스터 환경일 경우 true 필요
@@ -13,13 +15,15 @@ eureka:
 
 spring:
   application:
-    name: msa-user
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/root
-#    driver-class-name: org.postgresql.Driver
-#    username: root
-#    password: 1234
+    name: user-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/users #cloud-native-msa-user-mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
     show-sql: true #SQL 실행문 로그로 기록
     properties:
       hibernate:
@@ -35,3 +39,6 @@ spring:
 logging:
   level:
     org.springframework.batch.item.database: DEBUG
+
+greeting:
+  message: Welcome to User Micro Service.

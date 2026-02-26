@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @GetMapping("/")
-    public String user(){
-        return "user";
+
+    @GetMapping("/health-check")
+    public String status(){
+        return String.format("Now Working");
     }
+
 }
