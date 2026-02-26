@@ -1,5 +1,5 @@
 server:
-  port: 60000 #Spring Cloud - Eureka 기본 서버포트
+  port: 8081 #Spring Cloud - Eureka 기본 서버포트
 
 eureka:
   client:
@@ -10,7 +10,7 @@ eureka:
 
 spring:
   application:
-    name: init
+    name: msa-user
 #  datasource:
 #    url: jdbc:postgresql://localhost:5432/root
 #    driver-class-name: org.postgresql.Driver
