@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /*
 * model 효율화
 * - create, update 세부 목적 등으로 Request Object 운용(처리과정 및 세부 로직 등으로 인해 필요 항목이 다를 수 있음).
@@ -24,6 +26,22 @@ public class UserController {
     @GetMapping("/health-check")
     public String status(){
         return String.format("Now Working");
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResponse>> readAllUsers(){
+
+        List<UserResponse> list = userService.readAllUsers();
+
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<UserResponse> readUser(@PathVariable("userId") Long userId){
+
+        UserResponse userResponse = userService.readUser(userId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(userResponse);
     }
 
     @PostMapping("/users")
