@@ -2,6 +2,8 @@ package com.msa.user.service;
 
 import com.msa.user.model.entity.User;
 import com.msa.user.model.request.UserCreateRequest;
+import com.msa.user.model.response.OrderResponse;
+import com.msa.user.model.response.UserOrderResponse;
 import com.msa.user.model.response.UserResponse;
 import com.msa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +41,16 @@ public class UserService {
         return userRepository.findAll().stream()
                 .map(UserResponse::from)//Entity > Dto
                 .toList();
+    }
+
+    public UserOrderResponse readUserOrders(Long userId) {
+//        return UserOrderResponse.of(
+//                userRepository.findById(userId),
+//                orderRepository.findAllById(userId).stream()
+//                        .map(OrderResponse::from)
+//                        .toList()
+//        );
+
+        return UserOrderResponse.of(new UserResponse(), List.of(new OrderResponse()));
     }
 }

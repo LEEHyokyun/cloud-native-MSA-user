@@ -1,6 +1,7 @@
 package com.msa.user.controller;
 
 import com.msa.user.model.request.UserCreateRequest;
+import com.msa.user.model.response.UserOrderResponse;
 import com.msa.user.model.response.UserResponse;
 import com.msa.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,13 @@ public class UserController {
         UserResponse userResponse = userService.readUser(userId);
 
         return ResponseEntity.status(HttpStatus.OK).body(userResponse);
+    }
+
+    @GetMapping("/users/orders")
+    public ResponseEntity<UserOrderResponse> readUserOrders(@PathVariable("userId") Long userId) {
+        UserOrderResponse userOrderResponse = userService.readUserOrders(userId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(userOrderResponse);
     }
 
     @PostMapping("/users")
