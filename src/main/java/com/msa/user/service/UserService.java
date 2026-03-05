@@ -1,19 +1,14 @@
 package com.msa.user.service;
 
-import com.msa.user.config.order.feignConfig.OrderFeignClient;
-import com.msa.user.config.order.restTemplate.OrderConfig;
+import com.msa.user.config.order.feignClient.OrderFeignClient;
 import com.msa.user.model.entity.User;
 import com.msa.user.model.request.UserCreateRequest;
-import com.msa.user.model.response.OrderResponse;
 import com.msa.user.model.response.UserOrderResponse;
 import com.msa.user.model.response.UserResponse;
 import com.msa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 

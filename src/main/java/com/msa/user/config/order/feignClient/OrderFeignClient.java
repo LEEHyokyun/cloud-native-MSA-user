@@ -1,4 +1,4 @@
-package com.msa.user.config.order.feignConfig;
+package com.msa.user.config.order.feignClient;
 
 import com.msa.user.model.response.OrderResponse;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 //eureka
-@FeignClient(name = "ORDER-SERVICE")
+@FeignClient(
+        name = "ORDER-SERVICE"
+)
 public interface OrderFeignClient {
 
     @GetMapping("/orders/{userId}")
