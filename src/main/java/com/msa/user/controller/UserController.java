@@ -45,7 +45,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userResponse);
     }
 
-    @GetMapping("/users/orders")
+    @GetMapping("/users/orders/{userId}")
     public ResponseEntity<UserOrderResponse> readUserOrders(@PathVariable("userId") Long userId) {
         UserOrderResponse userOrderResponse = userService.readUserOrders(userId);
 

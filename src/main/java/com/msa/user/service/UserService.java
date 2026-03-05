@@ -1,5 +1,6 @@
 package com.msa.user.service;
 
+import com.msa.user.config.order.OrderConfig;
 import com.msa.user.model.entity.User;
 import com.msa.user.model.request.UserCreateRequest;
 import com.msa.user.model.response.OrderResponse;
@@ -7,8 +8,11 @@ import com.msa.user.model.response.UserOrderResponse;
 import com.msa.user.model.response.UserResponse;
 import com.msa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +22,8 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final RestTemplate restTemplate;
+    private final OrderConfig orderConfig;
 
     @Transactional
     public UserResponse create(UserCreateRequest userCreateRequest) {
@@ -44,13 +50,17 @@ public class UserService {
     }
 
     public UserOrderResponse readUserOrders(Long userId) {
-//        return UserOrderResponse.of(
-//                userRepository.findById(userId),
-//                orderRepository.findAllById(userId).stream()
-//                        .map(OrderResponse::from)
-//                        .toList()
-//        );
 
-        return UserOrderResponse.of(new UserResponse(), List.of(new OrderResponse()));
+        String readOrderOfUserUrl = String.format(orderConfig.getReadOrderOfUserUrl(), userId);
+
+        return UserOrderResponse.of(
+                UserResponse.from(userRepository.findById(userId).orElse(null)),
+                restTemplate.exchange(
+                        readOrderOfUserUrl,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<List<OrderResponse>>() {}
+                ).getBody()
+        );
     }
 }
