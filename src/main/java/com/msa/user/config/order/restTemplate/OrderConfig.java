@@ -1,4 +1,4 @@
-package com.msa.user.config.order;
+package com.msa.user.config.order.restTemplate;
 
 import lombok.Getter;
 import lombok.Setter;

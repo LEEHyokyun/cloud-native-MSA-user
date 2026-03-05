@@ -1,6 +1,7 @@
 package com.msa.user.service;
 
-import com.msa.user.config.order.OrderConfig;
+import com.msa.user.config.order.feignConfig.OrderFeignClient;
+import com.msa.user.config.order.restTemplate.OrderConfig;
 import com.msa.user.model.entity.User;
 import com.msa.user.model.request.UserCreateRequest;
 import com.msa.user.model.response.OrderResponse;
@@ -15,15 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-    private final RestTemplate restTemplate;
-    private final OrderConfig orderConfig;
+    private final OrderFeignClient orderFeignClient;
 
     @Transactional
     public UserResponse create(UserCreateRequest userCreateRequest) {
@@ -51,16 +50,21 @@ public class UserService {
 
     public UserOrderResponse readUserOrders(Long userId) {
 
-        String readOrderOfUserUrl = String.format(orderConfig.getReadOrderOfUserUrl(), userId);
+//        String readOrderOfUserUrl = String.format(orderConfig.getReadOrderOfUserUrl(), userId);
+//
+//        return UserOrderResponse.of(
+//                UserResponse.from(userRepository.findById(userId).orElse(null)),
+//                restTemplate.exchange(
+//                        readOrderOfUserUrl,
+//                        HttpMethod.GET,
+//                        null,
+//                        new ParameterizedTypeReference<List<OrderResponse>>() {}
+//                ).getBody()
+//        );
 
         return UserOrderResponse.of(
-                UserResponse.from(userRepository.findById(userId).orElse(null)),
-                restTemplate.exchange(
-                        readOrderOfUserUrl,
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<List<OrderResponse>>() {}
-                ).getBody()
-        );
+        UserResponse.from(userRepository.findById(userId).orElse(null)),
+        orderFeignClient.readOrderOfUserUrl(userId)
+            );
     }
 }
