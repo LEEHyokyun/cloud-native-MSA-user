@@ -1,9 +1,13 @@
 ## 1.  개요
 
-![img_4.png](img_4.png)
-
 - Java ver 21.
 - Spring Boot ver 3.5.0 / Spring Cloud 2025.0.x Northfields
+
+> System
+![img_4.png](img_4.png)
+
+> SAGA
+![img_5.png](img_5.png)
 
 > Study
 - 본 프로젝트는 MSA Project 설계 및 구현 등에 대한 공부 내용을 담고 있으며, 실전에 바로 투입할 수 있을 정도의 깊이로 학습한 내용을 반영한다. 
