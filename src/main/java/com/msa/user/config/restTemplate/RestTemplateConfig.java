@@ -1,4 +1,4 @@
-package com.msa.user.config.order.restTemplate;
+package com.msa.user.config.restTemplate;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

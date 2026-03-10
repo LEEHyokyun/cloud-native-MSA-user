@@ -1,4 +1,4 @@
-package com.msa.user.config.order.feignClient;
+package com.msa.user.config.feignClient;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;

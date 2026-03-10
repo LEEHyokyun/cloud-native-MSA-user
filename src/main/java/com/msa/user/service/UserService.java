@@ -1,6 +1,6 @@
 package com.msa.user.service;
 
-import com.msa.user.config.order.feignClient.OrderFeignClient;
+import com.msa.user.config.feignClient.OrderFeignClient;
 import com.msa.user.model.entity.User;
 import com.msa.user.model.request.UserCreateRequest;
 import com.msa.user.model.response.UserOrderResponse;
