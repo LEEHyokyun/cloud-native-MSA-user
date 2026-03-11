@@ -1,4 +1,4 @@
-package com.msa.user.config.restTemplate;
+package com.msa.user.infra.config.restTemplate;
 
 import lombok.Getter;
 import lombok.Setter;

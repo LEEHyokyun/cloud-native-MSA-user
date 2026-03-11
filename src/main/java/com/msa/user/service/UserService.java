@@ -1,11 +1,16 @@
 package com.msa.user.service;
 
-import com.msa.user.config.feignClient.OrderFeignClient;
+import com.msa.user.infra.config.feignClient.OrderFeignClient;
+import com.msa.user.infra.config.resilience.ResilienceType;
 import com.msa.user.model.entity.User;
 import com.msa.user.model.request.UserCreateRequest;
+import com.msa.user.model.response.OrderFallbackResponse;
 import com.msa.user.model.response.UserOrderResponse;
 import com.msa.user.model.response.UserResponse;
 import com.msa.user.repository.UserRepository;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +23,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final OrderFeignClient orderFeignClient;
+
+    private final String ORDER_OF_ONE_USER_FALLBACK_ID = "ORDER_OF_ONE_USER";
 
     @Transactional
     public UserResponse create(UserCreateRequest userCreateRequest) {
@@ -43,6 +50,8 @@ public class UserService {
                 .toList();
     }
 
+    @Bulkhead(name = ORDER_OF_ONE_USER_FALLBACK_ID, type = Bulkhead.Type.SEMAPHORE)
+    @CircuitBreaker(name = ORDER_OF_ONE_USER_FALLBACK_ID, fallbackMethod = "readUserOrders")
     public UserOrderResponse readUserOrders(Long userId) {
 
 //        String readOrderOfUserUrl = String.format(orderConfig.getReadOrderOfUserUrl(), userId);
@@ -61,5 +70,12 @@ public class UserService {
         UserResponse.from(userRepository.findById(userId).orElse(null)),
         orderFeignClient.readOrderOfUserUrl(userId)
             );
+    }
+
+    private UserOrderResponse readUserOrders(Long userId, Throwable throwable) {
+        return UserOrderResponse.of(
+                UserResponse.from(userRepository.findById(userId).orElse(null)),
+                OrderFallbackResponse.from("[ERROR]+"+"["+throwable+"]주문 내역을 불러올 수 없습니다.")
+        );
     }
 }
