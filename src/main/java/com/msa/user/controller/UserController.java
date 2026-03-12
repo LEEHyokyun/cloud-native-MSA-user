@@ -26,14 +26,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @Observed(
-            name = "check",
-            contextualName = "[READ OREDER OF ONE USER]",
-            lowCardinalityKeyValues = {
-                    "SERVICE", "USER-SERVICE",
-                    "OPERATION", "READ"
-            }
-    )
     @GetMapping("/health-check")
     public String status(){
         return String.format("Now Working");
