@@ -1,4 +1,4 @@
-package com.msa.user.infra.config.resilience;
+package com.msa.user.infra.http.config.resilience;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import lombok.Getter;

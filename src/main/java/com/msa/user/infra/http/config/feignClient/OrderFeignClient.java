@@ -1,4 +1,4 @@
-package com.msa.user.infra.config.feignClient;
+package com.msa.user.infra.http.config.feignClient;
 
 import com.msa.user.model.response.OrderResponse;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -4,6 +4,8 @@ import com.msa.user.model.request.UserCreateRequest;
 import com.msa.user.model.response.UserOrderResponse;
 import com.msa.user.model.response.UserResponse;
 import com.msa.user.service.UserService;
+import io.micrometer.core.annotation.Timed;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,14 @@ public class UserController {
 
     private final UserService userService;
 
+    @Observed(
+            name = "check",
+            contextualName = "[READ OREDER OF ONE USER]",
+            lowCardinalityKeyValues = {
+                    "SERVICE", "USER-SERVICE",
+                    "OPERATION", "READ"
+            }
+    )
     @GetMapping("/health-check")
     public String status(){
         return String.format("Now Working");
@@ -45,6 +55,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userResponse);
     }
 
+    @Observed(
+            name = "read.user.orders",
+            contextualName = "[READ OREDER OF ONE USER]",
+            lowCardinalityKeyValues = {
+                    "SERVICE", "USER-SERVICE",
+                    "OPERATION", "READ"
+            }
+    )
     @GetMapping("/users/orders/{userId}")
     public ResponseEntity<UserOrderResponse> readUserOrders(@PathVariable("userId") Long userId) {
         UserOrderResponse userOrderResponse = userService.readUserOrders(userId);

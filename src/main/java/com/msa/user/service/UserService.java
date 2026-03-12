@@ -1,7 +1,6 @@
 package com.msa.user.service;
 
-import com.msa.user.infra.config.feignClient.OrderFeignClient;
-import com.msa.user.infra.config.resilience.ResilienceType;
+import com.msa.user.infra.http.config.feignClient.OrderFeignClient;
 import com.msa.user.model.entity.User;
 import com.msa.user.model.request.UserCreateRequest;
 import com.msa.user.model.response.OrderFallbackResponse;
@@ -10,7 +9,6 @@ import com.msa.user.model.response.UserResponse;
 import com.msa.user.repository.UserRepository;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

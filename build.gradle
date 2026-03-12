@@ -45,6 +45,11 @@ allprojects {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp' // cloud bus push -> rabiitmq로 연결하기 위한 프로토콜
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+        /*
+        * Monitoring
+        * */
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'io.micrometer:micrometer-registry-prometheus'
 
         /*
         * cloud circuit breaker
