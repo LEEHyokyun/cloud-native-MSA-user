@@ -1,19 +1,12 @@
-## 1.  개요
+## 1. Project 개요
 
-- Java ver 21.
-- Spring Boot ver 3.5.0 / Spring Cloud 2025.0.x Northfields
+본 Trouble Shootings은 대규모 트래픽을 도메인 분리 및 분산 환경 구성을 통해 구조적 개선 및 성능 개선을 확보할 수 있는 요건을 살펴본다.
 
-> System
-![img_4.png](img_4.png)
+- 기존 구성한 Order 도메인(Monolithic)의 트래픽이 집중되어, 단일 규모의 상태 및 데이터 관리가 어려울때 어떤 설계를 적용할 수 있는가?
+- 분산 환경을 활용하여 비동기 메시징 체계에서의 트랜잭션 정합성을 유지하기 위한 방안은 무엇이 있을까?
 
-> SAGA
-![img_5.png](img_5.png)
-
-> Study
-- 본 프로젝트는 MSA Project 설계 및 구현 등에 대한 공부 내용을 담고 있으며, 실전에 바로 투입할 수 있을 정도의 깊이로 학습한 내용을 반영한다. 
-- 이 프로젝트는 기본적으로 향후 Cloud Native 환경 구축을 위한 기본적인 뼈대이다.
-  - CI/CD
-    - Continuous Deployment(DevOps/Pipeline)
+도매인을 분리하여 트래픽을 분리하고, 실제 MSA 구동 환경을 가정하여 서비스를 운영하기 위해 각 마이크로서비스의 설계 방안을 살펴본다.<br/>
+현재 구성한 프로젝트의 중요 요소(Order/Product 도메인의 분리 운영/비동기 메시징 체계로 이어지는 SAGA Pattern/Kafka 모듈을 OCP 기반에 근거하여 아키텍칭하는 방안)에 대해 하기와 같이 간략히 정리한다.
 
 ## 2. MicroService - User Service
 
