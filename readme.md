@@ -8,6 +8,14 @@
 - [MSA 시리즈 #7](https://velog.io/@gyrbs22/%EB%B0%B1%EC%97%94%EB%93%9C-Road-To-MSA-7-Kafka-Patterns-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98-%EB%A9%94%EC%8B%9C%EC%A7%95-%EC%B2%98%EB%A6%AC-%EC%8B%A4%ED%8C%A8-%EC%83%81%ED%99%A9%EC%97%90-%EB%8C%80%ED%95%9C-Trouble-ShootingsDLTRetryOutbox-%EB%B0%8F-%EB%A9%B1%EB%93%B1%EC%84%B1-%EB%B3%B4%EC%9E%A5-%EC%A0%84%EB%9E%B5)
 - [MSA 시리즈 #8](https://velog.io/@gyrbs22/%EB%B0%B1%EC%97%94%EB%93%9C-Road-To-MSA-8-Kafka-Patterns-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98-%EB%A9%94%EC%8B%9C%EC%A7%95-%EC%B2%98%EB%A6%AC-%EC%8B%A4%ED%8C%A8-%EC%83%81%ED%99%A9%EC%97%90-%EB%8C%80%ED%95%9C-Trouble-ShootingsOutbox-%EB%B0%8F-%EB%A9%B1%EB%93%B1%EC%84%B1-%EB%B3%B4%EC%9E%A5-%EC%A0%84%EB%9E%B5)
 
+**MSA 프로젝트 구성을 통한 도메인/트래픽 분리와 상태 관리**
+- [MSA - Eureka server](https://github.com/LEEHyokyun/cloud-native-MSA)
+- [MSA - config server](https://github.com/LEEHyokyun/cloud-native-MSA-config-server)
+- [MSA - gateway](https://github.com/LEEHyokyun/cloud-native-MSA-gateway)
+- [MSA - 주문 도메인](https://github.com/LEEHyokyun/cloud-native-MSA-order)
+- [MSA - 주문 도메인(Scaled-out 상황을 가정한 CDC/데이터 동기화 방안)](https://github.com/LEEHyokyun/cloud-native-MSA-user2)
+- [MSA - 상품 도메인](https://github.com/LEEHyokyun/cloud-native-MSA-product)
+
 ## 1. Project 개요
 
 본 Trouble Shootings은 대규모 트래픽을 도메인 분리 및 분산 환경 구성을 통해 구조적 개선 및 성능 개선을 확보할 수 있는 요건을 살펴본다.
